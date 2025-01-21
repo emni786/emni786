@@ -1,5 +1,11 @@
-# Hi 👋, I'm AL AMIN aka AlaminXpro & Caesium
-**Passionate Programmers from Bangladesh and Beyond**
+# Hi there! 👋 I'm Redwan Hossen
+**Passionate Programmers from Bangladesh and Beyond**  
+**🌟A passionate learner and aspiring developer from **Bangladesh**!**  
+**💡 Exploring the world of **Web Development** and **Programming**.**  
+
+---
+
+![Profile Views](https://komarev.com/ghpvc/?username=emni786&label=Profile%20Views&color=0e75b6&style=flat)  
 
 ---
 
@@ -70,6 +76,9 @@
 
 ## 📊 Profile Stats:
 ![Profile Stats](image.png) <!-- Replace with the uploaded image link -->
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=emni786&show_icons=true&hide_title=true&count_private=true)
+
+
 
 ---
 
@@ -84,4 +93,3 @@
 
 ---
 
-Feel free to replace placeholders with specific details like project URLs or additional stats.
