@@ -78,7 +78,9 @@
 
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=emni786&show_icons=true&hide_title=true&count_private=true)
 
-
+![caesium's GitHub Stats](https://github-readme-stats.vercel.app/api?username=emni786&show_icons=true&theme=radical)  
+![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=emni786&theme=radical)  
+![Most Used Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=emni786&layout=compact&theme=radical)
 
 
 
