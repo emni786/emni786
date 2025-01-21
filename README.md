@@ -69,17 +69,7 @@
 ---
 
 ## 📊 Profile Stats:
-### AL AMIN's Stats:
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=AlaminXpro&show_icons=true&theme=radical)  
-### Caesium's Stats:
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=caesium72&show_icons=true&theme=radical)
-
-### Top Languages by Repo:
-- **JavaScript**: 40%  
-- **C**: 20%  
-- **Dart**: 15%  
-- **TypeScript**: 15%  
-- **C++**: 10%
+![Profile Stats](image.png) <!-- Replace with the uploaded image link -->
 
 ---
 
