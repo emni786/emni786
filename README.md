@@ -75,7 +75,6 @@
 ---
 
 ## 📊 Profile Stats:
-![Profile Stats](image.png) <!-- Replace with the uploaded image link -->
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=emni786&show_icons=true&hide_title=true&count_private=true)
 
 
