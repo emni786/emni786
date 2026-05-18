@@ -1,59 +1,194 @@
-# Hi there! 👋 I'm Redwan Hossen
-**🌟A passionate learner and aspiring developer from **Bangladesh**!** 
-**💡 Exploring the world of **Web Development** and **Programming**.**
+# Xenonowledge
+
+An AI-powered "second brain" / link librarian web app. Save anything from anywhere, get
+AI summaries + tags, browse with a 3D knowledge graph, and receive curated digests.
+
+This monorepo contains:
+
+```
+app/         React + Vite + TypeScript + Tailwind + shadcn/ui frontend
+supabase/    Database migrations, RLS policies, pg_cron jobs, Edge Functions (Deno)
+extension/   Chrome MV3 browser extension scaffold
+```
 
 ---
 
+## 1. Quick start
 
-- 🔭 I’m currently working on **Php, SQL**  
-- 🌱 I’m currently learning **HTML, CSS, JavaScript, React.js, Full-stack Development, MERN Stack**  
-- 🤝 I'm looking to collaborate on **Web Development Projects**  
-- 💼 All of my projects are available at [redwan's room](#)  
-- 📫 How to reach me: **me.redwanhossen@gmail.com**   
-  
+```bash
+# 1. install
+cd app
+npm install
 
----
+# 2. configure env
+cp .env.example .env.local
+#   VITE_SUPABASE_URL=...
+#   VITE_SUPABASE_ANON_KEY=...
 
-## 🌐 Socials:
-[![GitHub](https://img.shields.io/badge/GitHub-1F2328?logo=gitHub&logoColor=white)](https://github.com/emni786)  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-3681CD?logo=linkedIn&logoColor=white)](https://www.linkedin.com/in/md-redwan-hossen-685064339/) 
-[![Facebook](https://img.shields.io/badge/Facebook-0866FF?logo=facebook&logoColor=white)](https://www.facebook.com/me.redwan786)
+# 3. run frontend
+npm run dev
+```
 
-
----
-
-## 🛠️ Languages and Tools:
-### Languages:
-![C](https://img.shields.io/badge/C-A8B9CC?style=flat-square&logo=c&logoColor=white)
-![C++](https://img.shields.io/badge/C++-00599C?style=flat-square&logo=cplusplus&logoColor=white)
-![Java](https://img.shields.io/badge/Java-AEB6BC?style=for-the-badge&logo=openjdk&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
-![PHP](https://img.shields.io/badge/PHP-515D94?style=flat-square&logo=php&logoColor=white)
-
-### Frameworks & Libraries:
-![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
-![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat-square&logo=nestjs&logoColor=white)
-![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=flat-square&logo=laravel&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
-![iGraphics](https://img.shields.io/badge/iGraphics-20232A?style=flat-square&logo=igraphics&logoColor=white)
-
-### IDEs & Editors:
-![phpStorm IDEA](https://img.shields.io/badge/PHPStorm-000000?style=for-the-badge&logo=phpstorm&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white)
-![Sublime Text](https://img.shields.io/badge/Sublime%20Text-FF9800?style=flat-square&logo=sublime-text&logoColor=white)
+For the backend you need a Supabase project. See **Section 3**.
 
 ---
 
-## 📊 GitHub Stats:
-![Redwan's GitHub Stats](https://github-readme-stats.vercel.app/api?username=emni786&show_icons=true&theme=radical)  
-![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=emni786&theme=radical)  
-![Most Used Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=emni786&layout=compact&theme=radical)
+## 2. Environment variables
+
+### Frontend (`app/.env.local`)
+
+| Var | Required | Notes |
+| --- | --- | --- |
+| `VITE_SUPABASE_URL` | yes | Project URL from Supabase dashboard |
+| `VITE_SUPABASE_ANON_KEY` | yes | Anonymous public key |
+| `VITE_APP_URL` | no | Public URL of the app (used by bookmarklet) |
+
+### Edge functions (Supabase project secrets)
+
+Set with `supabase secrets set KEY=value`.
+
+| Var | Required | Notes |
+| --- | --- | --- |
+| `SUPABASE_URL` | yes | Auto-injected by Supabase |
+| `SUPABASE_ANON_KEY` | yes | Auto-injected by Supabase |
+| `SUPABASE_SERVICE_ROLE_KEY` | yes | Auto-injected by Supabase |
+| `OPENAI_API_KEY` | one of | OpenAI API key |
+| `ANTHROPIC_API_KEY` | one of | Anthropic API key (alternative provider) |
+| `GEMINI_API_KEY` | one of | Google Gemini API key (alternative provider) |
+| `AI_PROVIDER` | yes | `openai` \| `anthropic` \| `gemini` |
+| `AI_MODEL` | no | Defaults per provider |
+| `RESEND_API_KEY` | yes | For digest + auth emails |
+| `RESEND_FROM` | yes | e.g. `Xenonowledge <noreply@your.domain>` |
+| `TELEGRAM_WEBHOOK_SECRET` | yes | Random string used as Telegram secret_token |
+| `PGSODIUM_KEY_ID` | yes | UUID of the pgsodium key used to encrypt secrets |
 
 ---
 
-## 🏆 GitHub Trophies:
-![GitHub Trophies](https://github-profile-trophy.vercel.app/?username=emni786&theme=radical&no-frame=true&row=1&column=7)
+## 3. Backend setup
+
+```bash
+# install supabase cli
+npm i -g supabase
+
+# link
+supabase login
+supabase link --project-ref <your-ref>
+
+# apply migrations
+supabase db push
+
+# deploy edge functions
+supabase functions deploy ingest-link analyze-link ai-smart-search \
+                         ai-discover telegram-webhook poll-rss \
+                         send-digest generate-recommendations link-health
+
+# seed demo data (optional, see supabase/seed.sql)
+psql "$DATABASE_URL" -f supabase/seed.sql
+```
+
+The migrations enable extensions: `pgcrypto`, `pgsodium`, `vector`, `pg_cron`, `pg_net`.
 
 ---
+
+## 4. Browser extension
+
+The extension lives in `extension/`. To install:
+
+1. In the app, go to **Settings → Browser Extension** and click **Generate Token**.
+   Copy the token (shown once).
+2. Click **Download Extension (.zip)**.
+3. In Chrome: `chrome://extensions` → Developer mode → Load unpacked → select the
+   unzipped folder.
+4. Click the extension icon, paste your project URL + token. Done.
+
+The bookmarklet alternative is on the same Settings page.
+
+---
+
+## 5. Telegram bot
+
+In **Settings → Telegram Bot**:
+
+1. Talk to `@BotFather`, create a bot, copy the token.
+2. Paste it into the field — it is encrypted at rest with `pgsodium`.
+3. Click **Activate Webhook** — the app calls Telegram's `setWebhook` pointing to
+   `https://<project>.supabase.co/functions/v1/telegram-webhook` with
+   `secret_token=$TELEGRAM_WEBHOOK_SECRET`.
+4. Add the bot as admin to a group/channel. Every URL in any message becomes a link.
+
+---
+
+## 6. Project layout
+
+```
+app/
+├── src/
+│   ├── pages/             # Route components (Dashboard, Library, etc.)
+│   ├── components/
+│   │   ├── ui/            # shadcn-style primitives
+│   │   ├── layout/        # Header, Sidebar, AuthGuard
+│   │   ├── library/       # Library-specific components
+│   │   ├── dashboard/     # Dashboard widgets
+│   │   ├── graph/         # 3D knowledge graph + themes
+│   │   ├── analytics/     # Heatmaps, charts
+│   │   ├── settings/      # Settings sections
+│   │   └── digest/
+│   ├── lib/               # supabase, utils, ai, search
+│   ├── hooks/             # TanStack Query hooks
+│   ├── store/             # Zustand stores
+│   ├── types/             # database.ts (generated), domain types
+│   └── styles/
+├── public/
+└── package.json
+
+supabase/
+├── migrations/            # SQL migrations (schema, RLS, cron)
+├── functions/             # Deno edge functions
+│   ├── _shared/           # shared utils (ai client, html parse, zod)
+│   ├── ingest-link/
+│   ├── analyze-link/
+│   ├── ai-smart-search/
+│   ├── ai-discover/
+│   ├── telegram-webhook/
+│   ├── poll-rss/
+│   ├── send-digest/
+│   ├── generate-recommendations/
+│   └── link-health/
+└── seed.sql
+
+extension/                 # Chrome MV3
+├── manifest.json
+├── src/
+│   ├── background.ts
+│   ├── popup.html
+│   ├── popup.ts
+│   └── options.html
+└── icons/
+```
+
+---
+
+## 7. Security notes
+
+- All tables enforce Row Level Security (`owner_id = auth.uid()`).
+- Sensitive secrets (Telegram bot tokens, extension tokens) are stored encrypted via
+  `pgsodium`. The plaintext token is shown to the user **once**.
+- Edge functions validate every request body with `zod`.
+- AI provider keys live only in Supabase secrets — never in the client.
+
+---
+
+## 8. Scripts
+
+```bash
+# in app/
+npm run dev         # vite dev server
+npm run build       # production build
+npm run lint        # eslint
+npm run typecheck   # tsc --noEmit
+
+# in supabase/
+supabase db push
+supabase functions deploy <name>
+supabase functions serve <name>
+```
