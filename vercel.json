@@ -1,0 +1,17 @@
+{
+  "buildCommand": "cd app && npm install && npm run build",
+  "outputDirectory": "app/dist",
+  "installCommand": "echo 'install handled by buildCommand'",
+  "framework": null,
+  "rewrites": [
+    { "source": "/((?!assets/|favicon.svg|.*\\.[a-z0-9]+$).*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}

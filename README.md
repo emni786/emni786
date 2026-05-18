@@ -178,7 +178,19 @@ extension/                 # Chrome MV3
 
 ---
 
-## 8. Scripts
+## 8. Deployment
+
+Quick version:
+
+- **Frontend** → Vercel. Import the repo, set the three `VITE_*` env vars, deploy.
+  The included `vercel.json` already builds `app/` and adds the SPA rewrite.
+- **Backend** → Supabase. `supabase db push` for migrations, `supabase functions deploy …` for edge functions.
+
+See [`DEPLOY.md`](./DEPLOY.md) for the full step-by-step.
+
+---
+
+## 9. Scripts
 
 ```bash
 # in app/
