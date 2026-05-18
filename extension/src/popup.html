@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Xenonowledge</title>
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0;
+        width: 280px;
+        padding: 16px;
+        font-family: 'JetBrains Mono', 'SF Mono', monospace;
+        background: #0a0a0c;
+        color: #eee;
+      }
+      h1 { font-size: 14px; margin: 0 0 4px; color: #10b981; }
+      p { font-size: 11px; color: #888; margin: 0 0 12px; }
+      button {
+        width: 100%;
+        padding: 10px;
+        background: #10b981;
+        color: #000;
+        border: 0;
+        border-radius: 6px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      button:disabled { opacity: 0.6; cursor: progress; }
+      .out { margin-top: 10px; font-size: 11px; }
+      .ok { color: #10b981; }
+      .err { color: #f87171; }
+      a { color: #10b981; font-size: 11px; }
+    </style>
+  </head>
+  <body>
+    <h1>⌬ Xenonowledge</h1>
+    <p>Save this tab to your library.</p>
+    <button id="save">Save current tab</button>
+    <div id="out" class="out"></div>
+    <p style="margin-top:12px"><a href="#" id="open-options">Open settings</a></p>
+    <script src="popup.js"></script>
+  </body>
+</html>
